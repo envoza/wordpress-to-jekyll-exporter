@@ -1,8 +1,8 @@
-# Copyright (C) 2022 WordPress Jekyll Export 2.3.4
-# This file is distributed under the same license as the WordPress Jekyll Export 2.3.4 package.
+# Copyright (C) 2022 WordPress Jekyll Export 2.3.6
+# This file is distributed under the same license as the WordPress Jekyll Export 2.3.6 package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPress Jekyll Export 2.3.4\n"
+"Project-Id-Version: WordPress Jekyll Export 2.3.6\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,6 +13,6 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: jekyll-exporter.php:110, jekyll-exporter.php:110
+#: jekyll-exporter.php:111, jekyll-exporter.php:111
 msgid "Export to Jekyll"
 msgstr ""
