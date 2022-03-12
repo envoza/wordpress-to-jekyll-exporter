@@ -182,6 +182,8 @@ class Jekyll_Export {
 			}
 		}
 
+		$output['template'] = pathinfo(get_page_template_slug($post->ID), PATHINFO_FILENAME);
+
 		$output = apply_filters( 'jekyll_export_meta', $output );
 		return $output;
 	}
