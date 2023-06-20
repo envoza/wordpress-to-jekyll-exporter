@@ -247,7 +247,12 @@ class Jekyll_Export {
 			}
 		}
 
+		remove_filter( 'the_content', 'wptexturize' );
+		remove_filter( 'the_content', 'convert_chars' );
+		remove_filter( 'the_content', 'do_shortcode', 11 );
 		$content   = apply_filters( 'the_content', $post->post_content );
+		add_filter( 'the_content', 'do_shortcode', 11 );
+
 		$converter = new Markdownify\ConverterExtra( Markdownify\Converter::LINK_IN_PARAGRAPH );
 		$markdown  = $converter->parseString( $content );
 
