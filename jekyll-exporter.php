@@ -180,7 +180,14 @@ class Jekyll_Export {
 			}
 		}
 
-		$output['template'] = pathinfo(get_page_template_slug($post->ID), PATHINFO_FILENAME);
+		$output['template'] = pathinfo(get_page_template_slug($post->ID), PATHINFO_FILENAME);	
+		$output['page-slug'] = $post->post_name;	
+		if ($post->post_parent != null)
+		{
+			$output['parent-slug'] = get_post($post->post_parent)->post_name;
+		}
+		$categories = get_the_category($post->ID);
+		$output['category-slug'] = $categories[0]->slug;
 
 		$output = apply_filters( 'jekyll_export_meta', $output );
 		return $output;
