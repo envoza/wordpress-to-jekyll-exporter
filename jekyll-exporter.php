@@ -158,9 +158,7 @@ class Jekyll_Export {
 		);
 
 		// Preserve exact permalink, since Jekyll doesn't support redirection.
-		if ( 'page' !== $post->post_type ) {
-			$output['permalink'] = str_replace( home_url(), '', get_permalink( $post ) );
-		}
+		$output['permalink'] = str_replace( home_url(), '', get_permalink( $post ) );
 
 		// Convert traditional post_meta values, hide hidden values.
 		foreach ( get_post_custom( $post->ID ) as $key => $value ) {
