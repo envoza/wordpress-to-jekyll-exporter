@@ -124,7 +124,7 @@ class Jekyll_Export {
 		}
 
 		$posts      = array();
-		$post_types = apply_filters( 'jekyll_export_post_types', array( 'post', 'page', 'revision' ) );
+		$post_types = apply_filters( 'jekyll_export_post_types', array( 'post', 'page' ) );
 
 		/**
 		 * WordPress style rules don't let us interpolate a string before passing it to
