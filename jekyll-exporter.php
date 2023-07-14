@@ -255,9 +255,24 @@ class Jekyll_Export {
 		remove_filter( 'the_content', 'wptexturize' );
 		remove_filter( 'the_content', 'convert_chars' );
 		remove_filter( 'the_content', 'do_shortcode', 11 );
-		$content   = apply_filters( 'the_content', $post->post_content );
+		$content = apply_filters( 'the_content', $post->post_content );
 		add_filter( 'the_content', 'do_shortcode', 11 );
+		
+		// Convert double quotes to single quoted
+		$pattern = '/""([^"]+)""/';
+		$replacement = "'$1'";
+		$content = preg_replace($pattern, $replacement, $content);
 
+		// Remove img srcsets
+		$pattern = '/srcset="[^"]+"\s+sizes="[^"]+"\s+/';
+		$replacement = '';
+		$content = preg_replace($pattern, $replacement, $content);
+
+		// Convert captions to includes
+		$pattern = '/\[caption\s+id="attachment_[0-9]+"\s+align="([^"]+)"\s+width="([^"]+)"\s+caption="([^"]+)"\]\s*\<img\s+class="([^"]+)"\s+title="([^"]+)"\s+src="([^"]+)"\s+alt="([^"]+)"\s+width="([^"]+)"\s+height="([^"]+)"\s+\/\>\s*\[\/caption\]/';
+		$replacement = '{% include captionedimage.html align="$1" width="$2" caption="$3" class="$4" title="$5" src="$6" alt="$7" height="$9" %}';
+		$content = preg_replace($pattern, $replacement, $content);
+		
 		$converter = new Markdownify\ConverterExtra( Markdownify\Converter::LINK_IN_PARAGRAPH );
 		$markdown  = $converter->parseString( $content );
 
