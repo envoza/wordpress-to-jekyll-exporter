@@ -258,11 +258,11 @@ class Jekyll_Export {
 		$content = apply_filters( 'the_content', $post->post_content );
 		add_filter( 'the_content', 'do_shortcode', 11 );
 		
-		// Convert double quotes to single quoted
-		$pattern = '/""([^"]+)""/';
-		$replacement = "'$1'";
+		// Remove domain from image URLs
+		$pattern = '/src="http:\/\/www.derekandlindsay.co.uk/';
+		$replacement = 'src="';
 		$content = preg_replace($pattern, $replacement, $content);
-
+		
 		// Remove img srcsets
 		$pattern = '/srcset="[^"]+"\s+sizes="[^"]+"\s+/';
 		$replacement = '';
@@ -272,10 +272,15 @@ class Jekyll_Export {
 		$pattern = '/\[caption\s+id="attachment_[0-9]+"\s+align="([^"]+)"\s+width="([^"]+)"\s+caption="([^"]+)"\]\s*\<img\s+class="([^"]+)"\s+title="([^"]+)"\s+src="([^"]+)"\s+alt="([^"]+)"\s+width="([^"]+)"\s+height="([^"]+)"\s+\/\>\s*\[\/caption\]/';
 		$replacement = '{% include captionedimage.html align="$1" width="$2" caption="$3" class="$4" title="$5" src="$6" alt="$7" height="$9" %}';
 		$content = preg_replace($pattern, $replacement, $content);
-		
+
 		$converter = new Markdownify\ConverterExtra( Markdownify\Converter::LINK_IN_PARAGRAPH );
 		$markdown  = $converter->parseString( $content );
-
+		
+		// Convert double pairs of quotes to single quoted
+		$pattern = '/""([^"]+)""/';
+		$replacement = '"\'$1\'"';
+		$markdown = preg_replace($pattern, $replacement, $markdown);
+		
 		if ( strpos( $markdown, '[]: ' ) !== false ) {
 			// faulty links; return plain HTML.
 			$content = apply_filters( 'jekyll_export_html', $content );
