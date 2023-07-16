@@ -280,7 +280,15 @@ class Jekyll_Export {
 		$pattern = '/""([^"]+)""/';
 		$replacement = '"\'$1\'"';
 		$markdown = preg_replace($pattern, $replacement, $markdown);
-		
+
+		// Remove underscore escaping for src parameters
+		$pattern = '/src="(.*?)\\\\(.*?)(?<!\\\\)"/';
+		$replacement = 'src="$1$2"';
+		while (preg_match($pattern, $markdown))
+		{
+			$markdown = preg_replace($pattern, $replacement, $markdown);
+		}
+				
 		if ( strpos( $markdown, '[]: ' ) !== false ) {
 			// faulty links; return plain HTML.
 			$content = apply_filters( 'jekyll_export_html', $content );
