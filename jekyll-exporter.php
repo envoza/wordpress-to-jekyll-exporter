@@ -273,6 +273,11 @@ class Jekyll_Export {
 		$replacement = '{% include captionedimage.html align="$1" width="$2" caption="$3" class="$4" title="$5" src="$6" alt="$7" height="$9" %}';
 		$content = preg_replace($pattern, $replacement, $content);
 
+		// Convert captions to includes (attributes moved)
+		$pattern = '/\[caption\s+id="attachment_[0-9]+"\s+align="([^"]+)"\s+width="([^"]+)"\s+caption="([^"]+)"\]\s*\<img\s+src="([^"]+)"\s+alt="([^"]+)"\s+title="([^"]+)"\s+width="([^"]+)"\s+height="([^"]+)"\s+class="([^"]+)"\s+\/\>\s*\[\/caption\]/';
+		$replacement = '{% include captionedimage.html align="$1" width="$2" caption="$3" class="$9" title="$6" src="$4" alt="$5" height="$8" %}';
+		$content = preg_replace($pattern, $replacement, $content);
+
 		$converter = new Markdownify\ConverterExtra( Markdownify\Converter::LINK_IN_PARAGRAPH );
 		$markdown  = $converter->parseString( $content );
 		
