@@ -163,7 +163,9 @@ class Jekyll_Export {
 		// Convert traditional post_meta values, hide hidden values.
 		foreach ( get_post_custom( $post->ID ) as $key => $value ) {
 
-			if ( substr( $key, 0, 1 ) === '_' ) {
+			if ( substr( $key, 0, 1 ) === '_' &&
+				$key !== '_aioseop_title' &&
+				$key !== '_aioseop_description' ) {
 				continue;
 			}
 
