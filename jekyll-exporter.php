@@ -155,6 +155,7 @@ class Jekyll_Export {
 			'excerpt' => $post->post_excerpt,
 			'layout'  => get_post_type( $post ),
 			'guid'    => $post->guid,
+			'page-order' => $post->menu_order
 		);
 
 		// Preserve exact permalink, since Jekyll doesn't support redirection.
