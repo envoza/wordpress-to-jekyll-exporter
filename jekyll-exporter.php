@@ -149,6 +149,7 @@ class Jekyll_Export {
 
 		$output = array(
 			'postid'  => $post->ID,
+			'parentid'  => $post->post_parent,
 			'title'   => get_the_title( $post ),
 			'date'    => get_the_date( 'c', $post ),
 			'author'  => get_userdata( $post->post_author )->display_name,
